@@ -1,4 +1,5 @@
 {
+  "description": "nohup node http.js &",
   "dependencies": {
     "mysql": "^2.18.1"
   }
