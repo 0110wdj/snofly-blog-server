@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TalkController } from './talk/talk.controller';
+import { TalkModule } from './talk/talk.module';
 
 @Module({
   imports: [
@@ -16,7 +14,8 @@ import { TalkController } from './talk/talk.controller';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    TalkModule
   ],
-  controllers: [TalkController],
 })
+
 export class AppModule { }

@@ -1,4 +1,5 @@
 export class CreateMessageDto {
+  readonly id: string;
   readonly name: string;
   readonly context: string;
   readonly createTime?: number;
