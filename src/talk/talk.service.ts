@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMessageDto, QueryMessageDto } from './dto/message.dto';
+import { QueryMessageDto } from './dto/message.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Talk } from './entities/talk.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TalkService {
+  constructor(
+    @InjectRepository(Talk)
+    private readonly TalkRepository: Repository<Talk>,
+  ) { }
 
-  create(params: CreateMessageDto) {
-    console.log({ params });
-    return 'This action adds a new message';
+  async create(talk: Talk) {
+    return this.TalkRepository.save(talk)
   }
 
   findAll(query: QueryMessageDto) {
-    console.log({ query });
-    return `This action returns all list`;
+    return this.TalkRepository.find();
   }
 }

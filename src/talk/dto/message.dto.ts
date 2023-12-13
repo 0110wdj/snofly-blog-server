@@ -1,8 +1,7 @@
 export class CreateMessageDto {
-  readonly id: string;
+  readonly id?: number;
   readonly name: string;
-  readonly context: string;
-  readonly createTime?: number;
+  readonly message: string;
 }
 
 export class QueryMessageDto {

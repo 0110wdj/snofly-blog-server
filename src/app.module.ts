@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TalkModule } from './talk/talk.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -13,9 +15,12 @@ import { TalkModule } from './talk/talk.module';
       database: 'blog',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
+      dropSchema: true
     }),
     TalkModule
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 
 export class AppModule { }
