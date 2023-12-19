@@ -27,4 +27,10 @@ export class SichuanService {
       }, 60000);
     }
   }
+
+
+  clear() {
+    clearEffect()
+    return '清理完成'
+  }
 }

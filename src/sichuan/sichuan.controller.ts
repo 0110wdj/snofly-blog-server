@@ -7,8 +7,12 @@ import { Response } from 'express';
 export class SichuanController {
   constructor(private readonly SichuanService: SichuanService) { }
 
-  @Get('/getInfo')
+  @Get('/downLoad')
   async downLoad(@Query() query: QueryMessageDto, @Res() response: Response): Promise<any> {
     return this.SichuanService.downLoad(query, response)
+  }
+  @Get('/clear')
+  clear() {
+    return this.SichuanService.clear()
   }
 }
