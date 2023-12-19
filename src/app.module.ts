@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TalkModule } from './talk/talk.module';
+import { SichuanModule } from './sichuan/sichuan.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -17,7 +18,8 @@ import { AppService } from './app.service';
       synchronize: true,
       dropSchema: true
     }),
-    TalkModule
+    TalkModule,
+    SichuanModule
   ],
   controllers: [AppController],
   providers: [AppService],
