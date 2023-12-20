@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver-promise');
 
-const filesToCompress = ['./答复单位.txt', './公开时间.txt', './咨询标题.txt', './咨询内容答复.txt', './urlList.txt']; // 要压缩的文件列表
+const filesToCompress = ['./unit.txt', './time.txt', './title.txt', './context.txt', './urlList.txt']; // 要压缩的文件列表
 const outputZip = './compressed_files.zip'; // 输出的 ZIP 文件名
 
 const getZipStream = async (response) => {
