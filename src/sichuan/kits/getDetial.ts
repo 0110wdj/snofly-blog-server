@@ -1,4 +1,3 @@
-var request = require('request');
 var rp = require('request-promise');
 const fs = require('fs')
 
@@ -27,18 +26,23 @@ const getOption = (index: number) => {
 /* 获取某页数据 */
 const getDetil = async () => {
   for (let i = 0; i < list.length; i++) {
-    await rp(getOption(i)).then(async (parsedBody) => {
-      const obj = JSON.parse(parsedBody)
-      if (obj.status.code == 1) {
-        const custom = obj.custom
-        fs.appendFileSync('./title.txt', custom.rqsttitle + '\n')
-        const str = custom.answercontent?.replaceAll('\n', '').replaceAll('\r', '').replaceAll(' ', '')
-        fs.appendFileSync('./context.txt', (str || '空') + '\n')
-        fs.appendFileSync('./unit.txt', custom.answerou + '\n')
-        fs.appendFileSync('./time.txt', custom.finishtime + '\n')
-      }
-    })
+    try {
+      await rp(getOption(i)).then(async (parsedBody) => {
+        const obj = JSON.parse(parsedBody)
+        if (obj.status.code == 1) {
+          const custom = obj.custom
+          fs.appendFileSync('./title.txt', custom.rqsttitle + '\n')
+          const str = custom.answercontent?.replaceAll('\n', '').replaceAll('\r', '').replaceAll(' ', '')
+          fs.appendFileSync('./context.txt', (str || '空') + '\n')
+          fs.appendFileSync('./unit.txt', custom.answerou + '\n')
+          fs.appendFileSync('./time.txt', custom.finishtime + '\n')
+        }
+      })
+    } catch (error) {
+      Promise.reject()
+    }
   }
+  Promise.resolve()
 }
 
 const run = async () => {
