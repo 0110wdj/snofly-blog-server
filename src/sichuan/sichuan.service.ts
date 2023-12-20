@@ -12,6 +12,8 @@ export class SichuanService {
 
   async downLoad(range: QueryMessageDto, response: Response) {
     try {
+      await clearEffect()
+      console.log('complete clearEffect');
       await getUrlList(+range.start, +range.end)
       console.log('complete getUrlList');
       await getDetial()
@@ -21,13 +23,8 @@ export class SichuanService {
     } catch {
       return 'api error'
     } finally {
-      // 可以由前端完成主动清理，这里自动清理
-      setTimeout(() => {
-        clearEffect()
-      }, 60000);
     }
   }
-
 
   clear() {
     clearEffect()
