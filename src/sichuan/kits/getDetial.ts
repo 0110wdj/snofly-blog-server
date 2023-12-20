@@ -1,7 +1,6 @@
 var rp = require('request-promise');
 const fs = require('fs')
-
-var UrlListFile = './urllist.txt';
+const path = require('path')
 
 const list = []
 
@@ -27,6 +26,7 @@ const getOption = (index: number) => {
 const getDetil = async () => {
   for (let i = 0; i < list.length; i++) {
     try {
+      console.log(`read file ${i}/${list.length}`);
       await rp(getOption(i)).then(async (parsedBody) => {
         const obj = JSON.parse(parsedBody)
         if (obj.status.code == 1) {
@@ -45,10 +45,8 @@ const getDetil = async () => {
   Promise.resolve()
 }
 
-const run = async () => {
+const run = async (array) => {
   try {
-    const data = fs.readFileSync(UrlListFile, { encoding: 'utf8', flag: 'r' });
-    const array = data.toString().split('\n')
     array.forEach((item) => {
       if (item) {
         list.push(item.split('cguid=')[1])
@@ -57,6 +55,7 @@ const run = async () => {
     await getDetil()
     return Promise.resolve()
   } catch (error) {
+    console.error(error);
     return Promise.reject()
   }
 }

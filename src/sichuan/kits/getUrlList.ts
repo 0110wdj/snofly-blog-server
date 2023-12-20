@@ -1,5 +1,8 @@
 var rp = require('request-promise');
 var fs = require('fs');
+const path = require('path')
+import * as util from 'util';
+const appendFile = util.promisify(fs.appendFile);
 
 const getOption = (page: number) => {
   const url = 'https://www.sczwfw.gov.cn/cns-bmfw-websdt/rest/cnspublic/scwebsitecaseinfoaction/getInteractCaseInfoListByCondition'
@@ -19,17 +22,20 @@ const getOption = (page: number) => {
 /* 获取某页数据 */
 const getUrlList = async (start = 1, end = 3) => {
   try {
+    const filename = "./urlList.txt"
+    // const filePath = path.resolve(__dirname, "./urlList.txt"); // 获取绝对路径
     for (let i = start; i <= end; i++) {
-      await rp(getOption(i)).then((parsedBody) => {
-        const obj = JSON.parse(parsedBody)
-        if (obj.status.code == 1) {
-          obj.custom.infoList.forEach((item) => {
-            fs.appendFileSync("./urlList.txt", item.handleurl + '\n')
-          });
+      const parsedBody = await rp(getOption(i));
+      const obj = JSON.parse(parsedBody)
+      if (obj.status.code == 1) {
+        console.log(`write url from ${start} to ${end}, now at ${i}`);
+        for (const item of obj.custom.infoList) {
+          await appendFile(filename, item.handleurl + '\n');
         }
-      })
+      }
     }
-    return Promise.resolve()
+    const data = fs.readFileSync(filename, { encoding: 'utf8', flag: 'r' })
+    return Promise.resolve(data)
   } catch (error) {
     console.error(error);
     return Promise.reject()

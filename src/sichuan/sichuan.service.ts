@@ -14,9 +14,10 @@ export class SichuanService {
     try {
       await clearEffect()
       console.log('complete clearEffect');
-      await getUrlList(+range.start, +range.end)
+      const data = await getUrlList(+range.start, +range.end)
       console.log('complete getUrlList');
-      await getDetial()
+      const array = data.toString().split('\n').filter(i => i)
+      await getDetial(array)
       console.log('complete getDetial');
       const res = await getZipStream(response)
       return res;
