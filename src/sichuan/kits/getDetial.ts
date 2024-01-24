@@ -2,7 +2,7 @@ var rp = require('request-promise');
 const fs = require('fs')
 const path = require('path')
 
-const list = []
+let list = []
 
 const getOption = (index: number) => {
   const url = 'https://www.sczwfw.gov.cn/cns-bmfw-websdt/rest/cnspublic/scwebsitecaseinfoaction/getCaseInfoDeatil'
@@ -57,6 +57,8 @@ const run = async (array) => {
   } catch (error) {
     console.error(error);
     return Promise.reject()
+  } finally {
+    list = []
   }
 }
 
