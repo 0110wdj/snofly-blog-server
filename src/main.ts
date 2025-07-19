@@ -8,6 +8,7 @@ async function bootstrap() {
   // 配置CORS
   app.enableCors({
     origin: [
+      'http://localhost:80', // Astro开发服务器默认端口
       'http://localhost:4321', // Astro开发服务器默认端口
       'http://localhost:3000', // 可能的其他前端端口
       'http://127.0.0.1:4321',
