@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TalkModule } from './talk/talk.module';
-import { SichuanModule } from './sichuan/sichuan.module';
+import { DatabaseModule } from './database/database.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -15,11 +15,11 @@ import { AppService } from './app.service';
       password: 'snofly0110',
       database: 'blog',
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
-      dropSchema: true
+      synchronize: false,
+      dropSchema: false
     }),
     TalkModule,
-    SichuanModule
+    DatabaseModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,10 +12,16 @@ export class TalkService {
   ) { }
 
   async create(talk: Talk) {
-    return this.TalkRepository.save(talk)
+    // 自动设置创建时间（毫秒时间戳）
+    talk.createTime = Date.now();
+    return this.TalkRepository.save(talk);
   }
 
   findAll(query: QueryMessageDto) {
-    return this.TalkRepository.find();
+    return this.TalkRepository.find({
+      order: {
+        id: 'DESC' // 按ID倒序排列，最新的在最上面
+      }
+    });
   }
 }

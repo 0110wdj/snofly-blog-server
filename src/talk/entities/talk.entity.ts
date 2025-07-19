@@ -12,4 +12,6 @@ export class Talk {
   @Column({ length: 500 })
   message: string;
 
+  @Column({ type: 'bigint', comment: '创建时间' })
+  createTime: number;
 }

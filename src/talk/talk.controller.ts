@@ -9,11 +9,16 @@ export class TalkController {
 
   @Get('/getInfo')
   findAll(@Query() query: QueryMessageDto) {
-    return this.TalkService.findAll(query)
+    return this.TalkService.findAll(query);
   }
 
   @Post('/addInfo')
-  create(@Body() talk: Talk) {
-    return this.TalkService.create(talk)
+  async create(@Body() talk: Talk) {
+    const result = await this.TalkService.create(talk);
+    return {
+      success: true,
+      data: result,
+      message: '留言添加成功'
+    };
   }
 }

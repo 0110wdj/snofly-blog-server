@@ -1,10 +1,11 @@
 {
   "name": "bd",
-  "version": "0.0.1",
+  "version": "2.2.0",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "packageManager": "pnpm@9.0.6",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
