@@ -14,8 +14,7 @@ async function bootstrap() {
       'http://127.0.0.1:4321',
       'http://127.0.0.1:3000',
       // 生产环境域名
-      // 'https://yourdomain.com',
-      // 'http://yourdomain.com'
+      'https://www.snofly.cn'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     allowedHeaders: [
